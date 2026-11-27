@@ -1,34 +1,22 @@
-const dashboardData = {
-
-    XDO_CPH: 91.7,
-    XDO_Hours: 227,
-    XDO_Volume: 20792,
-
-    STR_CPH: 21.2,
-    STR_Hours: 3,
-    STR_Volume: 53,
-
-    RDC_CPH: 141.98,
-    RDC_Hours: 27,
-    RDC_Volume: 3869,
-
-    Wrap_Cage_CPH: 138.29,
-    Wrap_Cage_Hours: 19,
-    Wrap_Cage_Volume: 2662,
-
-    Wrap_Pallet_CPH: 0,
-    Wrap_Pallet_Hours: 0,
-    Wrap_Pallet_Volume: 0,
-
-    FPP_CPH: 0,
-    FPP_Hours: 0,
-    FPP_Volume: 0,
-
-    Total_Hours: 276,
-    Total_Volume: 27376,
-
-    Site_CPH: 99.28,
-
-    LastUpdated: "13:00"
-
-};
+const dashboardData = {XDO_Volume: 20792,
+XDO_Hours: 227,
+XDO_CPH: 91.7,
+STR_Volume: 53,
+STR_Hours: 3,
+STR_CPH: 21.2,
+RDC_Volume: 3869,
+RDC_Hours: 27,
+RDC_CPH: 141.98,
+Wrap_Pallet_Volume: 0,
+Wrap_Pallet_Hours: 0,
+Wrap_Pallet_CPH: 0,
+Total_Volume: 27376,
+Total_Hours: 276,
+Site_CPH: 99.28,
+Wrap_Cage_Volume: 2662,
+Wrap_Cage_Hours: 19,
+Wrap_Cage_CPH: 138.29,
+FPP_Volume: 0,
+FPP_Hours: 0,
+FPP_CPH: 0,
+LastUpdated: "27/11/2026 15:39"};
