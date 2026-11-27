@@ -2,48 +2,89 @@
 <html>
 
 <head>
-    <title>MK360 Dashboard</title>
+    <title>MK360 Operations Dashboard</title>
 
     <style>
 
         body{
-            background:#0f172a;
-            color:white;
-            font-family:Arial;
             margin:0;
+            padding:0;
+            background:#081224;
+            font-family:Arial, Helvetica, sans-serif;
+            color:white;
+        }
+
+        .header{
+            background:#0d1b34;
+            padding:30px;
+            text-align:center;
+            border-bottom:3px solid #2563eb;
+        }
+
+        .title{
+            font-size:64px;
+            font-weight:bold;
+        }
+
+        .subtitle{
+            font-size:28px;
+            color:#9ca3af;
+            margin-top:10px;
+        }
+
+        .dashboard{
             padding:30px;
         }
 
-        h1{
-            text-align:center;
-            font-size:60px;
-            margin-bottom:50px;
-        }
-
-        .container{
+        .row{
             display:flex;
-            justify-content:center;
-            gap:30px;
-            flex-wrap:wrap;
+            gap:20px;
+            margin-bottom:20px;
         }
 
         .card{
-            width:300px;
-            background:#1e293b;
-            border-radius:15px;
-            padding:30px;
+            flex:1;
+            background:#17263d;
+            border-radius:20px;
+            padding:25px;
             text-align:center;
+            box-shadow:0px 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .card-title{
+            font-size:32px;
+            color:#cbd5e1;
+            margin-bottom:20px;
+            font-weight:bold;
         }
 
         .value{
-            font-size:80px;
-            font-weight:bold;
+            font-size:72px;
             color:#3b82f6;
+            font-weight:bold;
         }
 
         .label{
-            font-size:28px;
-            margin-top:10px;
+            font-size:24px;
+            color:#94a3b8;
+            margin-top:5px;
+        }
+
+        .summary{
+            background:#0d1b34;
+            border:2px solid #2563eb;
+        }
+
+        .footer{
+            position:fixed;
+            bottom:0;
+            left:0;
+            right:0;
+            background:#111827;
+            text-align:center;
+            padding:15px;
+            font-size:22px;
+            color:#9ca3af;
         }
 
     </style>
@@ -52,25 +93,95 @@
 
 <body>
 
-<h1>MK360 LIVE DASHBOARD</h1>
+<div class="header">
 
-<div class="container">
-
-    <div class="card">
-        <div class="value">128</div>
-        <div class="label">Headcount</div>
+    <div class="title">
+        MK360 PICK PERFORMANCE
     </div>
 
-    <div class="card">
-        <div class="value">17</div>
-        <div class="label">Agency</div>
+    <div class="subtitle">
+        Friday 27 November 2026
     </div>
 
-    <div class="card">
-        <div class="value">102%</div>
-        <div class="label">Productivity</div>
+</div>
+
+<div class="dashboard">
+
+    <div class="row">
+
+        <div class="card">
+            <div class="card-title">XDO</div>
+            <div class="value">94</div>
+            <div class="label">CPH</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">STR</div>
+            <div class="value">112</div>
+            <div class="label">CPH</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">RDC</div>
+            <div class="value">155</div>
+            <div class="label">CPH</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">WRAP</div>
+            <div class="value">148</div>
+            <div class="label">CPH</div>
+        </div>
+
     </div>
 
+    <div class="row">
+
+        <div class="card summary">
+            <div class="card-title">TOTAL VOLUME</div>
+            <div class="value">22,087</div>
+        </div>
+
+        <div class="card summary">
+            <div class="card-title">TOTAL HOURS</div>
+            <div class="value">215.1</div>
+        </div>
+
+        <div class="card summary">
+            <div class="card-title">SITE CPH</div>
+            <div class="value">103</div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="card">
+            <div class="card-title">XDO VOLUME</div>
+            <div class="value">16,672</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">STR VOLUME</div>
+            <div class="value">53</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">RDC VOLUME</div>
+            <div class="value">3,292</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">WRAP VOLUME</div>
+            <div class="value">2,070</div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="footer">
+    Last Updated: 09:00
 </div>
 
 </body>
