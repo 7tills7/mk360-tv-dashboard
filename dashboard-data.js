@@ -16,8 +16,17 @@ const dashboardData = {
     Wrap_Cage_Hours: 19,
     Wrap_Cage_Volume: 2662,
 
+    Wrap_Pallet_CPH: 0,
+    Wrap_Pallet_Hours: 0,
+    Wrap_Pallet_Volume: 0,
+
+    FPP_CPH: 0,
+    FPP_Hours: 0,
+    FPP_Volume: 0,
+
     Total_Hours: 276,
     Total_Volume: 27376,
+
     Site_CPH: 99.28,
 
     LastUpdated: "13:00"
