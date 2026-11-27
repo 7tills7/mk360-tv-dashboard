@@ -1,225 +1,389 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
-<title>MK360 Pick Performance</title>
-
-<style>
-
-body{
-    margin:0;
-    background:#081224;
-    color:white;
-    font-family:Arial,sans-serif;
-    overflow:hidden;
-}
-
-.header{
-    text-align:center;
-    padding:20px;
-    border-bottom:3px solid #1d4ed8;
-}
-
-.header h1{
-    margin:0;
-    font-size:64px;
-}
-
-.header p{
-    color:#b3b3b3;
-    font-size:28px;
-}
-
-.dashboard{
-    padding:15px;
-}
-
-.row{
-    display:flex;
-    gap:15px;
-    margin-bottom:15px;
-}
-
-.card{
-    flex:1;
-    background:#172a46;
-    border-radius:20px;
-    text-align:center;
-    padding:20px;
-}
-
-.summary{
-    border:2px solid #1d4ed8;
-    background:#081f46;
-}
-
-.title{
-    font-size:24px;
-    font-weight:bold;
-    margin-bottom:10px;
-}
-
-.value{
-    font-size:72px;
-    font-weight:bold;
-    color:#4287ff;
-}
-
-.small{
-    font-size:28px;
-    color:#c4c4c4;
-}
-
-.footer{
-    text-align:center;
-    padding:10px;
-    color:#c4c4c4;
-    font-size:22px;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="header">
-
-    <h1>MK360 PICK PERFORMANCE</h1>
-
-    <p id="todayDate"></p>
-
-</div>
-
-<div class="dashboard">
-
-    <div class="row">
-
-        <div class="card">
-            <div class="title">XDO</div>
-            <div class="value" id="XDO_CPH"></div>
-            <div class="small">CPH</div>
-        </div>
-
-        <div class="card">
-            <div class="title">STR</div>
-            <div class="value" id="STR_CPH"></div>
-            <div class="small">CPH</div>
-        </div>
-
-        <div class="card">
-            <div class="title">RDC</div>
-            <div class="value" id="RDC_CPH"></div>
-            <div class="small">CPH</div>
-        </div>
-
-        <div class="card">
-            <div class="title">WRAP</div>
-            <div class="value" id="Wrap_Cage_CPH"></div>
-            <div class="small">CPH</div>
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <div class="card summary">
-            <div class="title">TOTAL VOLUME</div>
-            <div class="value" id="Total_Volume"></div>
-        </div>
-
-        <div class="card summary">
-            <div class="title">TOTAL HOURS</div>
-            <div class="value" id="Total_Hours"></div>
-        </div>
-
-        <div class="card summary">
-            <div class="title">SITE CPH</div>
-            <div class="value" id="Site_CPH"></div>
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <div class="card">
-            <div class="title">XDO VOLUME</div>
-            <div class="value" id="XDO_Volume"></div>
-        </div>
-
-        <div class="card">
-            <div class="title">STR VOLUME</div>
-            <div class="value" id="STR_Volume"></div>
-        </div>
-
-        <div class="card">
-            <div class="title">RDC VOLUME</div>
-            <div class="value" id="RDC_Volume"></div>
-        </div>
-
-        <div class="card">
-            <div class="title">WRAP VOLUME</div>
-            <div class="value" id="Wrap_Cage_Volume"></div>
-        </div>
-
-    </div>
-
-</div>
-
-<div class="footer">
-    Last Updated: <span id="LastUpdated"></span>
-</div>
-
-<script src="dashboard-data.js"></script>
-
-<script>
-
-for (const key in dashboardData) {
-
-    const element = document.getElementById(key);
-
-    if(element){
-
-        let value = dashboardData[key];
-
-        if(typeof value === "number"){
-
-            value = value.toLocaleString(undefined,{
-                maximumFractionDigits:1
-            });
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MK360 Pick Performance</title>
+    <style>
+        :root {
+            --bg-base: #060b14;
+            --bg-panel: #0f172a;
+            --bg-panel-elevated: #162238;
+            --border-subtle: rgba(148, 163, 184, 0.14);
+            --border-accent: rgba(56, 189, 248, 0.45);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-cph: #38bdf8;
+            --accent-vol: #e2e8f0;
+            --accent-hero: #34d399;
+            --accent-brand: #3b82f6;
         }
 
-        element.innerText = value;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    }
+        body {
+            background: radial-gradient(circle at top center, #0f1e36 0%, var(--bg-base) 70%);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 24px 32px;
+            gap: 20px;
+        }
 
-}
+        /* Header Bar */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-subtle);
+            flex-shrink: 0;
+        }
 
-document.getElementById("LastUpdated").innerText =
-dashboardData.LastUpdated;
+        .brand-block {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
 
-document.getElementById("todayDate").innerText =
-new Date().toLocaleDateString(
-'en-GB',
-{
-weekday:'long',
-day:'numeric',
-month:'long',
-year:'numeric'
-});
+        .site-badge {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 26px;
+            letter-spacing: 1.5px;
+            padding: 10px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+        }
 
-</script>
+        .header-titles h1 {
+            font-size: 42px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
 
-<script>
+        .header-titles p {
+            color: var(--text-secondary);
+            font-size: 20px;
+            font-weight: 500;
+            margin-top: 4px;
+        }
 
-setTimeout(function() {
-    location.reload();
-}, 60000);
+        .status-block {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-subtle);
+            padding: 12px 22px;
+            border-radius: 999px;
+            font-size: 20px;
+            color: var(--text-secondary);
+        }
 
-</script>
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            background-color: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 12px #10b981;
+            animation: pulse 2s infinite;
+        }
 
+        .status-block span#LastUpdated {
+            color: var(--text-primary);
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Main Dashboard Grid */
+        .dashboard {
+            flex: 1;
+            display: grid;
+            grid-template-rows: 1fr 1.15fr 1fr;
+            gap: 20px;
+            min-height: 0;
+        }
+
+        .row-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .row-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        /* Cards */
+        .card {
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.75) 0%, rgba(15, 23, 42, 0.9) 100%);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 20px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Top accent bar on cards */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-cph);
+            opacity: 0.85;
+        }
+
+        .card.volume-card::before {
+            background: #64748b;
+        }
+
+        /* Center Summary Row Styling */
+        .card.summary {
+            background: linear-gradient(145deg, #132544 0%, #0b162c 100%);
+            border: 1px solid var(--border-accent);
+            box-shadow: 0 12px 32px -4px rgba(14, 165, 233, 0.18);
+        }
+
+        .card.summary::before {
+            height: 6px;
+            background: linear-gradient(90deg, #38bdf8, #34d399);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        .card.summary .title {
+            color: #bae6fd;
+            font-size: 24px;
+        }
+
+        .unit-tag {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 4px 12px;
+            border-radius: 8px;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--accent-cph);
+            text-transform: uppercase;
+        }
+
+        .volume-card .unit-tag {
+            background: rgba(148, 163, 184, 0.12);
+            color: #cbd5e1;
+        }
+
+        .summary .unit-tag {
+            background: rgba(52, 211, 153, 0.15);
+            color: var(--accent-hero);
+        }
+
+        .value {
+            font-size: clamp(56px, 4.8vw, 84px);
+            font-weight: 800;
+            line-height: 1;
+            color: var(--accent-cph);
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -1px;
+            margin: auto 0;
+        }
+
+        .volume-card .value {
+            color: var(--accent-vol);
+        }
+
+        .card.summary .value {
+            font-size: clamp(68px, 5.8vw, 98px);
+            color: #ffffff;
+            text-shadow: 0 4px 24px rgba(56, 189, 248, 0.25);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="brand-block">
+            <div class="site-badge">MK360</div>
+            <div class="header-titles">
+                <h1>Pick Performance</h1>
+                <p id="todayDate"></p>
+            </div>
+        </div>
+        <div class="status-block">
+            <div class="status-dot"></div>
+            <div>Last Updated: <span id="LastUpdated">--:--</span></div>
+        </div>
+    </header>
+
+    <main class="dashboard">
+
+        <!-- Row 1: Stream CPH -->
+        <div class="row-4">
+            <div class="card">
+                <div class="card-header">
+                    <div class="title">XDO</div>
+                    <div class="unit-tag">CPH</div>
+                </div>
+                <div class="value" id="XDO_CPH"></div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="title">STR</div>
+                    <div class="unit-tag">CPH</div>
+                </div>
+                <div class="value" id="STR_CPH"></div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="title">RDC</div>
+                    <div class="unit-tag">CPH</div>
+                </div>
+                <div class="value" id="RDC_CPH"></div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="title">WRAP</div>
+                    <div class="unit-tag">CPH</div>
+                </div>
+                <div class="value" id="Wrap_Cage_CPH"></div>
+            </div>
+        </div>
+
+        <!-- Row 2: Site Totals Hero Row -->
+        <div class="row-3">
+            <div class="card summary">
+                <div class="card-header">
+                    <div class="title">Total Volume</div>
+                    <div class="unit-tag">Cases</div>
+                </div>
+                <div class="value" id="Total_Volume"></div>
+            </div>
+
+            <div class="card summary">
+                <div class="card-header">
+                    <div class="title">Total Hours</div>
+                    <div class="unit-tag">Hrs</div>
+                </div>
+                <div class="value" id="Total_Hours"></div>
+            </div>
+
+            <div class="card summary">
+                <div class="card-header">
+                    <div class="title">Site CPH</div>
+                    <div class="unit-tag">Avg CPH</div>
+                </div>
+                <div class="value" id="Site_CPH"></div>
+            </div>
+        </div>
+
+        <!-- Row 3: Stream Volumes -->
+        <div class="row-4">
+            <div class="card volume-card">
+                <div class="card-header">
+                    <div class="title">XDO Volume</div>
+                    <div class="unit-tag">Cases</div>
+                </div>
+                <div class="value" id="XDO_Volume"></div>
+            </div>
+
+            <div class="card volume-card">
+                <div class="card-header">
+                    <div class="title">STR Volume</div>
+                    <div class="unit-tag">Cases</div>
+                </div>
+                <div class="value" id="STR_Volume"></div>
+            </div>
+
+            <div class="card volume-card">
+                <div class="card-header">
+                    <div class="title">RDC Volume</div>
+                    <div class="unit-tag">Cases</div>
+                </div>
+                <div class="value" id="RDC_Volume"></div>
+            </div>
+
+            <div class="card volume-card">
+                <div class="card-header">
+                    <div class="title">Wrap Volume</div>
+                    <div class="unit-tag">Cases</div>
+                </div>
+                <div class="value" id="Wrap_Cage_Volume"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="dashboard-data.js"></script>
+    <script>
+        if (typeof dashboardData !== "undefined") {
+            for (const key in dashboardData) {
+                const element = document.getElementById(key);
+                if (element) {
+                    let value = dashboardData[key];
+                    if (typeof value === "number") {
+                        value = value.toLocaleString("en-GB", {
+                            maximumFractionDigits: 1
+                        });
+                    }
+                    element.innerText = value;
+                }
+            }
+
+            if (dashboardData.LastUpdated) {
+                document.getElementById("LastUpdated").innerText = dashboardData.LastUpdated;
+            }
+        }
+
+        document.getElementById("todayDate").innerText = new Date().toLocaleDateString(
+            "en-GB",
+            {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            }
+        );
+    </script>
 </body>
-
 </html>
