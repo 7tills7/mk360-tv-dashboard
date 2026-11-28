@@ -1,6 +1,6 @@
 const dashboardData = {XDO_Volume: 6536,
-XDO_Hours: 121,
-XDO_CPH: 54.13,
+XDO_Hours: 75,
+XDO_CPH: 86.86,
 STR_Volume: 0,
 STR_Hours: 0,
 STR_CPH: 0,
@@ -19,4 +19,4 @@ Wrap_Cage_CPH: 0,
 FPP_Volume: 0,
 FPP_Hours: 0,
 FPP_CPH: 0,
-LastUpdated: "28/11/2026 08:15"};
+LastUpdated: "28/11/2026 08:17"};
